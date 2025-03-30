@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <style>
+    /* Root Variables */
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --bg-light: #f4f7f6;
+      --bg-dark: #121212;
+      --text-light: #000;
+      --text-dark: #f4f7f6;
+    }
+
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #fff7e6, #ffedd5); 
+      color: var(--text-light);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      transition: all 0.4s ease-in-out;
+    }
+
+    [data-theme="dark"] {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    [data-theme="dark"] body {
+      background: #131313;
+    }
+
+    /* Dashboard Container */
+    .container {
+      max-width: 600px;
+      text-align: center;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: fadeIn 0.6s ease-in-out forwards;
+    }
+
+    [data-theme="dark"] .container {
+      background: #1e1e1e;
+      /* box-shadow: 0px 10px 25px rgba(255, 255, 255, 0.1); */
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Toggle Theme Button */
+    .btn-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-toggle:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .btn-toggle {
+      background: #333;
+      color: #fff;
+    }
+
+    /* Header Section */
+    .header-title {
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+      animation: slideIn 0.8s ease-in-out;
+    }
+
+    [data-theme="dark"] .header-title {
+      color: #fff;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .subheader {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 30px;
+      animation: slideIn 0.9s ease-in-out;
+    }
+
+    [data-theme="dark"] .subheader {
+      color: #bbb;
+    }
+
+    /* Buttons */
+    .btn-primary, .btn-secondary {
+      font-size: 1.1rem;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-color);
+      border: none;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(108, 117, 125, 0.3);
+    }
+
+    .btn-outline-danger:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(220, 53, 69, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    [data-theme="dark"] footer {
+      color: #999;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+      }
+      .header-title {
+        font-size: 2.2rem;
+      }
+      .subheader {
+        font-size: 1.1rem;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="btn-toggle" onclick="toggleTheme()">🌙</button>
+
+  <div class="container">
+    <!-- Header Section -->
+    <h1 class="header-title">Admin Dashboard</h1>
+    <p class="subheader">Welcome, <strong>{{ session['user'] }}</strong></p>
+
+    <!-- Action Buttons -->
+    <div class="d-grid gap-2">
+      <a href="{{ url_for('admin_users') }}" class="btn btn-primary">Manage Users</a>
+      <a href="{{ url_for('admin_loans') }}" class="btn btn-primary">View All Loans</a>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to User Dashboard</a>
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © 2025 Admin Dashboard. All rights reserved.
+    </footer>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+  
+      // Change toggle button icon dynamically
+      document.getElementById("theme-icon").textContent = newTheme === "light" ? "🌙" : "☀️";
+    }
+  </script>
+  
+  <!-- Theme Toggle Button -->
+  <button class="btn-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">🌙</span>
+  </button>
+  
+
+</body>
+</html>

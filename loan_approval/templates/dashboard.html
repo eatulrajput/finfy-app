@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loan Eligibility Dashboard</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Root Variables */
+    :root {
+      --bs-body-bg: #f4f7f6;
+      --bs-body-color: #000;
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --header-bg: #283593;
+      --header-text: #fff;
+    }
+
+    [data-theme="dark"] {
+      --bs-body-bg: #121212;
+      --bs-body-color: #f4f7f6;
+      --header-bg: #1e1e1e;
+      --header-text: #f4f7f6;
+    }
+
+    body {
+      background: var(--bs-body-bg);
+      color: var(--bs-body-color);
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .container {
+      margin-top: 60px;
+      max-width: 900px;
+    }
+
+    /* Header Section */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .user-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+    }
+
+    /* Section Styling */
+    .section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    [data-theme="dark"] .section {
+      background: #1e1e1e;
+    }
+
+    .section:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Form Inputs */
+    .form-control, .form-select {
+      border-radius: 8px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--primary-color);
+      border: none;
+      font-size: 1rem;
+      padding: 12px;
+      border-radius: 30px;
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-color);
+      border: none;
+      font-size: 1rem;
+      padding: 12px;
+      border-radius: 30px;
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-secondary:hover {
+      background: #545b62;
+      transform: scale(1.05);
+    }
+
+    /* Logout Button */
+    .btn-logout {
+      margin-top: 15px;
+    }
+
+    /* Dark Mode Toggle */
+    .btn-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-toggle:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    [data-theme="dark"] .btn-toggle {
+      background: #333;
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        margin-top: 40px;
+        padding: 15px;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body onload="loadTheme()">
+ 
+  <div class="container">
+    <div class="header">
+      <h1>Loan Eligibility Dashboard</h1>
+      <p>Welcome, <strong>{{ session['user'] }}</strong>!</p>
+    </div>
+
+    <div class="user-info">
+      <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm btn-logout">Logout</a>
+    </div>
+
+    <!-- Loan Eligibility Checker -->
+    <div class="section">
+      <h2>Loan Eligibility Checker</h2>
+      <form action="{{ url_for('dashboard') }}" method="post">
+        <input type="hidden" name="eligibility" value="1">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="sexo" class="form-label">Gender</label>
+            <select class="form-select" id="sexo" name="sexo" required>
+              <option value="" selected disabled>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="estado_civil" class="form-label">Marital Status</label>
+            <select class="form-select" id="estado_civil" name="estado_civil" required>
+              <option value="" selected disabled>Select Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="dependentes" class="form-label">Dependents</label>
+            <input type="number" class="form-control" id="dependentes" name="dependentes" placeholder="e.g., 0, 1, 2"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="educacao" class="form-label">Education</label>
+            <select class="form-select" id="educacao" name="educacao" required>
+              <option value="" selected disabled>Select Education</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Not Graduate">Not Graduate</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="empregado" class="form-label">Employed</label>
+            <select class="form-select" id="empregado" name="empregado" required>
+              <option value="" selected disabled>Select Employment</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="renda" class="form-label">Income</label>
+            <input type="number" class="form-control" id="renda" name="renda" placeholder="Enter amount" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="renda_conjuge" class="form-label">Spouse's Income</label>
+            <input type="number" class="form-control" id="renda_conjuge" name="renda_conjuge" placeholder="Enter amount"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="emprestimo" class="form-label">Loan Amount</label>
+            <input type="number" class="form-control" id="emprestimo" name="emprestimo" placeholder="Enter amount"
+              required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="prestacao_mensal" class="form-label">Monthly Installment</label>
+            <input type="number" class="form-control" id="prestacao_mensal" name="prestacao_mensal"
+              placeholder="Enter amount" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="historico_credito" class="form-label">Credit History</label>
+            <select class="form-select" id="historico_credito" name="historico_credito" required>
+              <option value="" selected disabled>Select Credit Score</option>
+              <option value="1">Good (1)</option>
+              <option value="0">Bad (0)</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="imovel" class="form-label">Property</label>
+            <input type="text" class="form-control" id="imovel" name="imovel" placeholder="Urban, Rural, etc." required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Check Eligibility</button>
+      </form>
+      {% if prediction_text %}
+      <div class="mt-3 alert alert-info">
+        <strong>Eligibility Prediction:</strong> {{ prediction_text }}
+      </div>
+      {% endif %}
+    </div>
+
+
+    <div class="section">
+      <h2>Loan Requests Received</h2>
+      {% if lender_requests %}
+      <div class="list-group">
+        {% for req in lender_requests %}
+        <div class="list-group-item loan-request">
+          <p><strong>From:</strong> {{ req.borrower.username }}</p>
+          <p><strong>Loan Amount:</strong> ${{ req.emprestimo }} | <strong>Status:</strong> {{ req.status }}</p>
+          {% if req.status == 'pending' %}
+          <div class="d-flex gap-2">
+            <form action="{{ url_for('accept_loan', loan_id=req.id) }}" method="post">
+              <button type="submit" class="btn btn-success btn-sm">Accept</button>
+            </form>
+            <form action="{{ url_for('reject_loan', loan_id=req.id) }}" method="post">
+              <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">No loan requests received.</p>
+      {% endif %}
+    </div>
+
+    <!-- Borrower Loan Requests -->
+    <div class="section">
+      <h2>Your Loan Requests</h2>
+      {% if borrower_requests %}
+      <div class="list-group">
+        {% for req in borrower_requests %}
+        <div class="list-group-item loan-request">
+          <p><strong>Loan Amount:</strong> ${{ req.emprestimo }} | <strong>Status:</strong> {{ req.status }}</p>
+          {% if req.status == 'pending' %}
+          <form action="{{ url_for('withdraw_loan', loan_id=req.id) }}" method="post">
+            <button type="submit" class="btn btn-warning btn-sm">Withdraw</button>
+          </form>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">No active loan requests.</p>
+      {% endif %}
+      <div class="mt-3">
+        <a href="{{ url_for('request_loan') }}" class="btn btn-success w-100">Request a Loan</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+  
+      // Change toggle button icon dynamically
+      document.getElementById("theme-icon").textContent = newTheme === "light" ? "🌙" : "☀️";
+    }
+  </script>
+  
+  <!-- Theme Toggle Button -->
+  <button class="btn-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">🌙</span>
+  </button>
+  
+  
+</body>
+</html>
