@@ -175,83 +175,99 @@
       <h2>Loan Eligibility Checker</h2>
       <form action="{{ url_for('dashboard') }}" method="post">
         <input type="hidden" name="eligibility" value="1">
+        
         <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="userGender" class="form-label">Gender</label>
-            <select class="form-select" id="userGender" name="userGender" required>
-              <option value="" selected disabled>Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="maritalStatus" class="form-label">Marital Status</label>
-            <select class="form-select" id="maritalStatus" name="maritalStatus" required>
-              <option value="" selected disabled>Select Status</option>
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="dependentsNo" class="form-label">Dependents</label>
-            <input type="number" class="form-control" id="dependentsNo" name="dependentsNo" placeholder="e.g., 0, 1, 2"
-              required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="educationLevel" class="form-label">Education</label>
-            <select class="form-select" id="educationLevel" name="educationLevel" required>
-              <option value="" selected disabled>Select Education</option>
-              <option value="Graduate">Graduate</option>
-              <option value="Not Graduate">Not Graduate</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="employeeStatus" class="form-label">Employed</label>
-            <select class="form-select" id="employeeStatus" name="employeeStatus" required>
-              <option value="" selected disabled>Select Employment</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="userIncome" class="form-label">Income</label>
-            <input type="number" class="form-control" id="userIncome" name="userIncome" placeholder="Enter amount" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="spouseIncome" class="form-label">Spouse's Income</label>
-            <input type="number" class="form-control" id="spouseIncome" name="spouseIncome" placeholder="Enter amount"
-              required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="loanAmount" class="form-label">Loan Amount</label>
-            <input type="number" class="form-control" id="loanAmount" name="loanAmount" placeholder="Enter amount"
-              required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="loanInstallment" class="form-label">Monthly Installment</label>
-            <input type="number" class="form-control" id="loanInstallment" name="loanInstallment"
-              placeholder="Enter amount" required>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="creditHistory" class="form-label">Credit History</label>
-            <select class="form-select" id="creditHistory" name="creditHistory" required>
-              <option value="" selected disabled>Select Credit Score</option>
-              <option value="1">Good (1)</option>
-              <option value="0">Bad (0)</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="propertyStatus" class="form-label">Property</label>
-            <input type="text" class="form-control" id="propertyStatus" name="propertyStatus" placeholder="Urban, Rural, etc." required>
-          </div>
+            <div class="col-md-6 mb-3">
+                <label for="userGender" class="form-label">Gender</label>
+                <select class="form-select" id="userGender" name="userGender" required>
+                    <option value="" disabled>Select Gender</option>
+                    <option value="Male" {% if request.form.get('userGender') == "Male" %} selected {% endif %}>Male</option>
+                    <option value="Female" {% if request.form.get('userGender') == "Female" %} selected {% endif %}>Female</option>
+                </select>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <label for="maritalStatus" class="form-label">Marital Status</label>
+                <select class="form-select" id="maritalStatus" name="maritalStatus" required>
+                    <option value="" disabled>Select Status</option>
+                    <option value="Single" {% if request.form.get('maritalStatus') == "Single" %} selected {% endif %}>Single</option>
+                    <option value="Married" {% if request.form.get('maritalStatus') == "Married" %} selected {% endif %}>Married</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="dependentsNo" class="form-label">Dependents</label>
+                <input type="number" class="form-control" id="dependentsNo" name="dependentsNo"
+                       value="{{ request.form.get('dependentsNo', '') }}" required>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="educationLevel" class="form-label">Education</label>
+                <select class="form-select" id="educationLevel" name="educationLevel" required>
+                    <option value="" disabled>Select Education</option>
+                    <option value="Graduate" {% if request.form.get('educationLevel') == "Graduate" %} selected {% endif %}>Graduate</option>
+                    <option value="Not Graduate" {% if request.form.get('educationLevel') == "Not Graduate" %} selected {% endif %}>Not Graduate</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="employeeStatus" class="form-label">Employed</label>
+                <select class="form-select" id="employeeStatus" name="employeeStatus" required>
+                    <option value="" disabled>Select Employment</option>
+                    <option value="Yes" {% if request.form.get('employeeStatus') == "Yes" %} selected {% endif %}>Yes</option>
+                    <option value="No" {% if request.form.get('employeeStatus') == "No" %} selected {% endif %}>No</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="userIncome" class="form-label">Income</label>
+                <input type="number" class="form-control" id="userIncome" name="userIncome"
+                       value="{{ request.form.get('userIncome', '') }}" required>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="spouseIncome" class="form-label">Spouse's Income</label>
+                <input type="number" class="form-control" id="spouseIncome" name="spouseIncome"
+                       value="{{ request.form.get('spouseIncome', '') }}" required>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="loanAmount" class="form-label">Loan Amount</label>
+                <input type="number" class="form-control" id="loanAmount" name="loanAmount"
+                       value="{{ request.form.get('loanAmount', '') }}" required>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="loanInstallment" class="form-label">Monthly Installment</label>
+                <input type="number" class="form-control" id="loanInstallment" name="loanInstallment"
+                       value="{{ request.form.get('loanInstallment', '') }}" required>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="creditHistory" class="form-label">Credit History</label>
+                <select class="form-select" id="creditHistory" name="creditHistory" required>
+                    <option value="" disabled>Select Credit Score</option>
+                    <option value="1" {% if request.form.get('creditHistory') == "1" %} selected {% endif %}>Good (1)</option>
+                    <option value="0" {% if request.form.get('creditHistory') == "0" %} selected {% endif %}>Bad (0)</option>
+                </select>
+            </div>
+    
+            <div class="col-md-6 mb-3">
+                <label for="propertyStatus" class="form-label">Property</label>
+                <input type="text" class="form-control" id="propertyStatus" name="propertyStatus"
+                       value="{{ request.form.get('propertyStatus', '') }}" required>
+            </div>
         </div>
+    
         <button type="submit" class="btn btn-primary w-100">Check Eligibility</button>
-      </form>
-      {% if prediction_text %}
-      <div class="mt-3 alert alert-info">
+    </form>
+    
+    {% if prediction_text %}
+    <div class="mt-3 alert alert-info">
         <strong>Eligibility Prediction:</strong> {{ prediction_text }}
-      </div>
-      {% endif %}
+    </div>
+    {% endif %}
+    
     </div>
 
 
