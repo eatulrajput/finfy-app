@@ -177,8 +177,8 @@
       <p><strong>ID:</strong> {{ loan.id }}</p>
       <p><strong>Borrower:</strong> {{ loan.borrower.username }}</p>
       <p><strong>Lender:</strong> {{ loan.lender_username }}</p>
-      <p><strong>Loan Amount:</strong> ${{ loan.loanAmount }}</p>
-      <p><strong>Installment:</strong> ${{ loan.loanInstallment }}</p>
+      <p><strong>Loan Amount:</strong> Rs. {{ loan.loanAmount }}</p>
+      <p><strong>Installment:</strong> Rs. {{ loan.loanInstallment }}</p>
       <p><strong>Status:</strong> <span class="badge bg-success">{{ loan.status }}</span></p>
       <p><strong>Details:</strong></p>
       <ul>
@@ -187,8 +187,8 @@
         <li><strong>Dependents:</strong> {{ loan.dependentsNo }}</li>
         <li><strong>Education:</strong> {{ loan.educationLevel }}</li>
         <li><strong>Employed:</strong> {{ loan.employeeStatus }}</li>
-        <li><strong>Income:</strong> ${{ loan.userIncome }}</li>
-        <li><strong>Spouse's Income:</strong> ${{ loan.spouseIncome }}</li>
+        <li><strong>Income:</strong> Rs. {{ loan.userIncome }}</li>
+        <li><strong>Spouse's Income:</strong> Rs. {{ loan.spouseIncome }}</li>
         <li><strong>Credit History:</strong> {{ loan.creditHistory }}</li>
         <li><strong>Property:</strong> {{ loan.propertyStatus }}</li>
       </ul>

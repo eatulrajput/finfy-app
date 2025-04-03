@@ -286,27 +286,35 @@
       <h2>Loan Requests Received</h2>
       {% if lender_requests %}
       <div class="list-group">
-        {% for req in lender_requests %}
-        <div class="list-group-item loan-request">
-          <p><strong>From:</strong> {{ req.borrower.username }}</p>
-          <p><strong>Loan Amount:</strong> ${{ req.loanAmount }} | <strong>Status:</strong> {{ req.status }}</p>
-          {% if req.status == 'pending' %}
-          <div class="d-flex gap-2">
-            <form action="{{ url_for('accept_loan', loan_id=req.id) }}" method="post">
-              <button type="submit" class="btn btn-success btn-sm">Accept</button>
-            </form>
-            <form action="{{ url_for('reject_loan', loan_id=req.id) }}" method="post">
-              <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-            </form>
+          {% for req in lender_requests %}
+          <div class="list-group-item loan-request">
+              <p><strong>From:</strong> {{ req.borrower.username }}</p>
+              <p><strong>Gender:</strong> {{ req.borrower.userGender }}</p>
+              <p><strong>{{ req.borrower.username }}'s Income:</strong> Rs. {{ req.borrower.userIncome }}</p>
+              <p><strong>Loan Amount:</strong> Rs. {{ req.loanAmount }}</p>
+              <p><strong>Monthly Installment:</strong> Rs. {{ req.loanInstallment }}</p>
+              <p><strong>Credit History:</strong> {{ "Good" if req.borrower.creditHistory == 1 else "Bad" }}</p>
+              <p><strong>Property Status:</strong> {{ req.borrower.propertyStatus }}</p>
+              <p><strong>Status:</strong> {{ req.status }}</p>
+  
+              {% if req.status == 'pending' %}
+              <div class="d-flex gap-2">
+                  <form action="{{ url_for('accept_loan', loan_id=req.id) }}" method="post">
+                      <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                  </form>
+                  <form action="{{ url_for('reject_loan', loan_id=req.id) }}" method="post">
+                      <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                  </form>
+              </div>
+              {% endif %}
           </div>
-          {% endif %}
-        </div>
-        {% endfor %}
+          {% endfor %}
       </div>
       {% else %}
       <p class="text-muted">No loan requests received.</p>
       {% endif %}
-    </div>
+  </div>
+  
 
     <!-- Borrower Loan Requests -->
     <div class="section">
@@ -315,7 +323,7 @@
       <div class="list-group">
         {% for req in borrower_requests %}
         <div class="list-group-item loan-request">
-          <p><strong>Loan Amount:</strong> ${{ req.loanAmount }} | <strong>Status:</strong> {{ req.status }}</p>
+          <p><strong>Loan Amount:</strong> Rs. {{ req.loanAmount }} | <strong>Status:</strong> {{ req.status }}</p>
           {% if req.status == 'pending' %}
           <form action="{{ url_for('withdraw_loan', loan_id=req.id) }}" method="post">
             <button type="submit" class="btn btn-warning btn-sm">Withdraw</button>
