@@ -29,17 +29,17 @@ class LoanRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     borrower_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     lender_username = db.Column(db.String(150), nullable=False)
-    sexo = db.Column(db.String(50))              # Gender
-    estado_civil = db.Column(db.String(50))        # Marital Status
-    dependentes = db.Column(db.String(50))         # Dependents
-    educacao = db.Column(db.String(50))            # Education
-    empregado = db.Column(db.String(50))           # Employed
-    renda = db.Column(db.Float)                    # Income
-    renda_conjuge = db.Column(db.Float)            # Spouse's Income
-    emprestimo = db.Column(db.Float)               # Loan Amount
-    prestacao_mensal = db.Column(db.Float)         # Monthly Installment
-    historico_credito = db.Column(db.Float)        # Credit History
-    imovel = db.Column(db.String(50))              # Property
+    userGender = db.Column(db.String(50))              # Gender
+    maritalStatus = db.Column(db.String(50))        # Marital Status
+    dependentsNo = db.Column(db.String(50))         # Dependents
+    educationLevel = db.Column(db.String(50))            # Education
+    employeeStatus = db.Column(db.String(50))           # Employed
+    userIncome = db.Column(db.Float)                    # Income
+    spouseIncome = db.Column(db.Float)            # Spouse's Income
+    loanAmount = db.Column(db.Float)               # Loan Amount
+    loanInstallment = db.Column(db.Float)         # Monthly Installment
+    creditHistory = db.Column(db.Float)        # Credit History
+    propertyStatus = db.Column(db.String(50))              # Property
     status = db.Column(db.String(50), default="pending")  # pending, accepted, rejected, withdrawn
 
     # Relationship to User model
@@ -135,7 +135,7 @@ def dashboard():
         # Process the eligibility checker form
         data = request.form.to_dict()
         input_df = pd.DataFrame([data])
-        numeric_cols = ['dependentes', 'renda', 'renda_conjuge', 'emprestimo', 'prestacao_mensal', 'historico_credito']
+        numeric_cols = ['dependentsNo', 'userIncome', 'spouseIncome', 'loanAmount', 'loanInstallment', 'creditHistory']
         for col in numeric_cols:
             if col in input_df.columns:
                 input_df[col] = pd.to_numeric(input_df[col], errors='coerce')
@@ -167,17 +167,17 @@ def request_loan():
         new_request = LoanRequest(
             borrower_id = User.query.filter_by(username=session['user']).first().id,
             lender_username = lender_username,
-            sexo = request.form['sexo'],
-            estado_civil = request.form['estado_civil'],
-            dependentes = request.form['dependentes'],
-            educacao = request.form['educacao'],
-            empregado = request.form['empregado'],
-            renda = float(request.form['renda']),
-            renda_conjuge = float(request.form['renda_conjuge']),
-            emprestimo = float(request.form['emprestimo']),
-            prestacao_mensal = float(request.form['prestacao_mensal']),
-            historico_credito = float(request.form['historico_credito']),
-            imovel = request.form['imovel']
+            userGender = request.form['userGender'],
+            maritalStatus = request.form['maritalStatus'],
+            dependentsNo = request.form['dependentsNo'],
+            educationLevel = request.form['educationLevel'],
+            employeeStatus = request.form['employeeStatus'],
+            userIncome = float(request.form['userIncome']),
+            spouseIncome = float(request.form['spouseIncome']),
+            loanAmount = float(request.form['loanAmount']),
+            loanInstallment = float(request.form['loanInstallment']),
+            creditHistory = float(request.form['creditHistory']),
+            propertyStatus = request.form['propertyStatus']
         )
         db.session.add(new_request)
         db.session.commit()

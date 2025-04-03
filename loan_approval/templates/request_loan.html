@@ -145,8 +145,8 @@
 
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="sexo" class="form-label">Gender</label>
-            <select class="form-select" name="sexo" id="sexo" required>
+            <label for="userGender" class="form-label">Gender</label>
+            <select class="form-select" name="userGender" id="userGender" required>
               <option value="" disabled selected>Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -154,8 +154,8 @@
           </div>
 
           <div class="col-md-6 mb-3">
-            <label for="estado_civil" class="form-label">Marital Status</label>
-            <select class="form-select" name="estado_civil" id="estado_civil" required>
+            <label for="maritalStatus" class="form-label">Marital Status</label>
+            <select class="form-select" name="maritalStatus" id="maritalStatus" required>
               <option value="" disabled selected>Select Status</option>
               <option value="Single">Single</option>
               <option value="Married">Married</option>
@@ -164,13 +164,13 @@
         </div>
 
         <div class="mb-3">
-          <label for="dependentes" class="form-label">Dependents</label>
-          <input type="number" class="form-control" name="dependentes" id="dependentes" placeholder="e.g., 0, 1, 2" required>
+          <label for="dependentsNo" class="form-label">Dependents</label>
+          <input type="number" class="form-control" name="dependentsNo" id="dependentsNo" placeholder="e.g., 0, 1, 2" required>
         </div>
 
         <div class="mb-3">
-          <label for="educacao" class="form-label">Education</label>
-          <select class="form-select" name="educacao" id="educacao" required>
+          <label for="educationLevel" class="form-label">Education</label>
+          <select class="form-select" name="educationLevel" id="educationLevel" required>
             <option value="" disabled selected>Select Education</option>
             <option value="Graduate">Graduate</option>
             <option value="Not Graduate">Not Graduate</option>
@@ -178,8 +178,8 @@
         </div>
 
         <div class="mb-3">
-          <label for="empregado" class="form-label">Employed</label>
-          <select class="form-select" name="empregado" id="empregado" required>
+          <label for="employeeStatus" class="form-label">Employed</label>
+          <select class="form-select" name="employeeStatus" id="employeeStatus" required>
             <option value="" disabled selected>Select Employment</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
@@ -188,29 +188,29 @@
 
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="renda" class="form-label">Income</label>
-            <input type="number" class="form-control" name="renda" id="renda" placeholder="Enter amount" required>
+            <label for="userIncome" class="form-label">Income</label>
+            <input type="number" class="form-control" name="userIncome" id="userIncome" placeholder="Enter amount" required>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="renda_conjuge" class="form-label">Spouse's Income</label>
-            <input type="number" class="form-control" name="renda_conjuge" id="renda_conjuge" placeholder="Enter amount" required>
+            <label for="spouseIncome" class="form-label">Spouse's Income</label>
+            <input type="number" class="form-control" name="spouseIncome" id="spouseIncome" placeholder="Enter amount" required>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="emprestimo" class="form-label">Loan Amount</label>
-            <input type="number" class="form-control" name="emprestimo" id="emprestimo" placeholder="Enter amount" required>
+            <label for="loanAmount" class="form-label">Loan Amount</label>
+            <input type="number" class="form-control" name="loanAmount" id="loanAmount" placeholder="Enter amount" required>
           </div>
           <div class="col-md-6 mb-3">
-            <label for="prestacao_mensal" class="form-label">Monthly Installment</label>
-            <input type="number" class="form-control" name="prestacao_mensal" id="prestacao_mensal" placeholder="Enter amount" required>
+            <label for="loanInstallment" class="form-label">Monthly Installment</label>
+            <input type="number" class="form-control" name="loanInstallment" id="loanInstallment" placeholder="Enter amount" required>
           </div>
         </div>
 
         <div class="mb-3">
-          <label for="historico_credito" class="form-label">Credit History</label>
-          <select class="form-select" name="historico_credito" id="historico_credito" required>
+          <label for="creditHistory" class="form-label">Credit History</label>
+          <select class="form-select" name="creditHistory" id="creditHistory" required>
             <option value="" disabled selected>Select Credit Score</option>
             <option value="1">Good (1)</option>
             <option value="0">Bad (0)</option>
@@ -218,8 +218,8 @@
         </div>
 
         <div class="mb-3">
-          <label for="imovel" class="form-label">Property</label>
-          <input type="text" class="form-control" name="imovel" id="imovel" placeholder="Urban, Rural, etc." required>
+          <label for="propertyStatus" class="form-label">Property</label>
+          <input type="text" class="form-control" name="propertyStatus" id="propertyStatus" placeholder="Urban, Rural, etc." required>
         </div>
 
         <button type="submit" class="btn btn-success w-100 btn-submit">Submit Loan Request</button>

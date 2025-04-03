@@ -177,20 +177,20 @@
       <p><strong>ID:</strong> {{ loan.id }}</p>
       <p><strong>Borrower:</strong> {{ loan.borrower.username }}</p>
       <p><strong>Lender:</strong> {{ loan.lender_username }}</p>
-      <p><strong>Loan Amount:</strong> ${{ loan.emprestimo }}</p>
-      <p><strong>Installment:</strong> ${{ loan.prestacao_mensal }}</p>
+      <p><strong>Loan Amount:</strong> ${{ loan.loanAmount }}</p>
+      <p><strong>Installment:</strong> ${{ loan.loanInstallment }}</p>
       <p><strong>Status:</strong> <span class="badge bg-success">{{ loan.status }}</span></p>
       <p><strong>Details:</strong></p>
       <ul>
-        <li><strong>Gender:</strong> {{ loan.sexo }}</li>
-        <li><strong>Marital Status:</strong> {{ loan.estado_civil }}</li>
-        <li><strong>Dependents:</strong> {{ loan.dependentes }}</li>
-        <li><strong>Education:</strong> {{ loan.educacao }}</li>
-        <li><strong>Employed:</strong> {{ loan.empregado }}</li>
-        <li><strong>Income:</strong> ${{ loan.renda }}</li>
-        <li><strong>Spouse's Income:</strong> ${{ loan.renda_conjuge }}</li>
-        <li><strong>Credit History:</strong> {{ loan.historico_credito }}</li>
-        <li><strong>Property:</strong> {{ loan.imovel }}</li>
+        <li><strong>Gender:</strong> {{ loan.userGender }}</li>
+        <li><strong>Marital Status:</strong> {{ loan.maritalStatus }}</li>
+        <li><strong>Dependents:</strong> {{ loan.dependentsNo }}</li>
+        <li><strong>Education:</strong> {{ loan.educationLevel }}</li>
+        <li><strong>Employed:</strong> {{ loan.employeeStatus }}</li>
+        <li><strong>Income:</strong> ${{ loan.userIncome }}</li>
+        <li><strong>Spouse's Income:</strong> ${{ loan.spouseIncome }}</li>
+        <li><strong>Credit History:</strong> {{ loan.creditHistory }}</li>
+        <li><strong>Property:</strong> {{ loan.propertyStatus }}</li>
       </ul>
     </div>
     {% endfor %}
