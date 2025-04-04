@@ -46,32 +46,8 @@ Finfy is an AI-powered interface that checks the loan eligibility using machine 
 4. Fund available loans if you're a lender.
 5. Loan approval and repayment handled through the platform.
 
-## 📜 Project Structure
-```
-finfy/
-│-- manage.py  # Django management script
-│-- finfy/  # Project settings
-│-- loans/  # Loan application logic
-│   ├── models.py  # Database models
-│   ├── views.py  # Business logic
-│   ├── urls.py  # URL routing
-│   ├── forms.py  # Django forms for user input
-│   ├── templates/  # HTML templates
-│-- static/  # CSS, JS, and images
-│-- requirements.txt  # Python dependencies
-```
-
 ## 🤖 Machine Learning Models
 - **Logistic Regression**: Predicts loan approval probability.
-
-## 📌 API Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | Home Page |
-| `/loan_list/` | GET | View all loans (user's loans + available loans) |
-| `/apply/` | POST | Apply for a loan |
-| `/<int:loan_id>/fund/` | POST | Fund a loan |
-| `/register/` | POST | User Registration |
 
 ## 🚀 Future Enhancements
 - **UPI-based Transactions**: Enable seamless funding and repayments.
