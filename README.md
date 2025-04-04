@@ -1,10 +1,8 @@
 # Finfy - AI-Driven Loan Eligibility App (Under-development)
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e26b74fd-8311-44ad-bf45-e9a66c6f9beb" alt="Logo" width="300">
+  <img src="https://github.com/user-attachments/assets/8021a279-1fcc-4fcb-9215-dfe11dace72b" alt="Logo" width="300">
 </p>
-
-
 
 Finfy is an AI-powered interface that checks the loan eligibility using machine learning. It aims to enhance.
 
