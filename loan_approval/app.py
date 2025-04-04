@@ -123,7 +123,6 @@ def logout():
     flash('Logged out successfully!')
     return redirect(url_for('index'))
 
-# Dashboard route (for normal users)
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if 'user' not in session:
@@ -131,6 +130,7 @@ def dashboard():
         return redirect(url_for('login'))
 
     prediction_text = ""
+
     if request.method == 'POST' and "eligibility" in request.form:
         # Process the eligibility checker form
         data = request.form.to_dict()
@@ -147,10 +147,22 @@ def dashboard():
         prediction_text = "Eligible for Loan" if prediction[0] == 1 else "Not Eligible for Loan"
 
     user = User.query.filter_by(username=session['user']).first()
+
     # Loan requests where the logged in user is the lender
     lender_requests = LoanRequest.query.filter_by(lender_username=session['user']).all()
-    # Loan requests made by the logged in user (as borrower)
+
+    # Loan requests made by the logged-in user (as borrower)
     borrower_requests = LoanRequest.query.filter_by(borrower_id=user.id).all()
+
+    # 🔍 Debugging: Print borrower details to check if data is available
+    print("\n🔎 Checking Loan Requests Data:")
+    for req in lender_requests:
+        print(f"📌 Borrower: {req.borrower.username}")
+        print(f"🧑 Gender: {req.userGender}")
+        print(f"💰 Income: {req.userIncome}")
+        print(f"🏠 Property Status: {req.propertyStatus}")
+        print("--------------------------------------------------")
+
 
     return render_template('dashboard.html', prediction_text=prediction_text,
                            lender_requests=lender_requests, borrower_requests=borrower_requests)

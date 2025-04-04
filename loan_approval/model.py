@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 df = pd.read_csv("C:\\Users\\KIIT\\Downloads\\archive\\clientes.csv")
 
 # Define target and features
-target_column = "aprovacao_emprestimo"  # Ensure this matches your dataset
+target_column = "loanApproval"  # Ensure this matches your dataset
 df[target_column] = df[target_column].map({'Y': 1, 'N': 0})  # Convert to 0/1
 
 # Handle missing values
