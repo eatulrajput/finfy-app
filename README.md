@@ -30,14 +30,6 @@ Finfy is an AI-powered interface that checks the loan eligibility using machine 
    ```sh
    pip install -r requirements.txt
    ```
-4. **Apply Migrations**
-   ```sh
-   python manage.py migrate
-   ```
-5. **Run the Server**
-   ```sh
-   python manage.py runserver
-   ```
 
 ## 📌 Usage
 1. Register/Login as a user.
