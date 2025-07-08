@@ -6,14 +6,14 @@
 
 Finfy is an AI-powered interface that checks the loan eligibility using machine learning. It aims to enhance.
 
-## 🏗️ Tech Stack
+## Tech Stack
 - **Frontend**: HTML, CSS, Bootstrap (for UI/UX)
 - **Backend**: Flask (Python-based web framework)
 - **Database**: SQLite for development
 - **Machine Learning**: Scikit-learn (for credit risk prediction)
 - **Deployment**: Heroku / AWS (Still not deployed)
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 1. **Clone the Repository**
    ```sh
@@ -31,22 +31,22 @@ Finfy is an AI-powered interface that checks the loan eligibility using machine 
    pip install -r requirements.txt
    ```
 
-## 📌 Usage
+## Usage
 1. Register/Login as a user.
 2. Apply for a loan by filling in the required details.
 3. View loan status and check creditworthiness predictions.
 4. Fund available loans if you're a lender.
 5. Loan approval and repayment handled through the platform.
 
-## 🤖 Machine Learning Models
+## Machine Learning Models
 - **Logistic Regression**: Predicts loan approval probability.
 
-## 🚀 Future Enhancements
+## Future Enhancements
 - **UPI-based Transactions**: Enable seamless funding and repayments.
 - **Live Credit Score Updates**: Real-time creditworthiness tracking.
 - **Blockchain Integration**: Secure and transparent loan transactions.
 
-## 🛠️ Contributing
+## Contributing
 Want to contribute? Follow these steps:
 1. Fork the repo
 2. Create a new branch (`git checkout -b feature-branch`)
@@ -54,12 +54,18 @@ Want to contribute? Follow these steps:
 4. Push to the branch (`git push origin feature-branch`)
 5. Create a pull request
 
-## 📜 License
-This project is licensed under the **MIT License**.
 
-## 🙌 Acknowledgments
-Special thanks to the contributors and open-source community for making this project possible!
+## Team Members
+
+| Name                                  | Role                           |
+|---------------------------------------|--------------------------------|
+| [Aritra Banerjee](https://github.com/Aritra-Banerjee-code)       | Project Lead & Backend Developer |
+| [Harsh Agrawalla](https://github.com/itsjustharshhuu)          | Tester              |
+| [Arya Vats](https://github.com/aryavats2)           | ML Engineer                     |
+| [Atul Rajput](https://github.com/eatulrajput)          | UI/UX Designer                  |
+
+## License
+This project is licensed under the **MIT License**.
 
 ---
 **Made with ❤️ by the Finfy Team**
-
